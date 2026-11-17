@@ -1,0 +1,1626 @@
+[Uploading index-complete.html…]()
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الإشارات الرقمية | هندسة تقنيات الحاسوب</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+/* =================== RESET & BASE =================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #667eea;
+    --primary-dark: #5568d3;
+    --secondary: #764ba2;
+    --accent: #f093fb;
+    --bg-dark: #0f0f23;
+    --bg-card: #ffffff;
+    --bg-light: #f0f2f8;
+    --text-dark: #1a1a2e;
+    --text-light: #6b7280;
+    --text-white: #ffffff;
+    --success: #10b981;
+    --error: #ef4444;
+    --warning: #f59e0b;
+    --radius: 16px;
+    --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.12);
+    --sidebar-width: 280px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--bg-light);
+    color: var(--text-dark);
+    display: flex;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* =================== SIDEBAR =================== */
+.sidebar {
+    width: var(--sidebar-width);
+    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: var(--text-white);
+    height: 100vh;
+    position: fixed;
+    right: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+}
+
+.sidebar-header {
+    padding: 28px 20px 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo-icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 12px;
+}
+
+.logo-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.sidebar-header h2 {
+    font-size: 28px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #667eea, #f093fb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 2px;
+}
+
+.sidebar-header p {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 4px;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 16px 0;
+    flex: 1;
+}
+
+.nav-item {
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border-right: 3px solid transparent;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.nav-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-white);
+    padding-right: 28px;
+}
+
+.nav-item.active {
+    background: linear-gradient(90deg, rgba(102, 126, 234, 0.2), transparent);
+    border-right-color: var(--primary);
+    color: var(--text-white);
+}
+
+.nav-icon {
+    font-size: 18px;
+    width: 24px;
+    text-align: center;
+    color: var(--primary);
+}
+
+.nav-item.active .nav-icon {
+    color: var(--accent);
+}
+
+.sidebar-footer {
+    padding: 16px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.4);
+    line-height: 1.8;
+}
+
+/* =================== MAIN CONTENT =================== */
+.main-content {
+    flex: 1;
+    margin-right: var(--sidebar-width);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* =================== PAGES =================== */
+.page {
+    display: none;
+    flex: 1;
+    padding: 0;
+    animation: fadeIn 0.4s ease;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* =================== WELCOME PAGE =================== */
+.welcome-hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-bg-pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(240, 147, 251, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(118, 75, 162, 0.15) 0%, transparent 50%);
+}
+
+.hero-bg-pattern::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
+}
+
+.hero-content {
+    text-align: center;
+    z-index: 2;
+    padding: 40px 20px;
+    max-width: 800px;
+}
+
+.hero-badge {
+    display: inline-block;
+    padding: 8px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    margin-bottom: 24px;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.hero-title {
+    font-size: 52px;
+    font-weight: 900;
+    color: var(--text-white);
+    margin-bottom: 12px;
+    line-height: 1.2;
+    text-shadow: 0 4px 20px rgba(102, 126, 234, 0.5);
+}
+
+.hero-subtitle {
+    font-size: 32px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea, #f093fb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+}
+
+.hero-desc {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 40px;
+    font-weight: 600;
+}
+
+.hero-wave {
+    max-width: 600px;
+    margin: 0 auto 40px;
+}
+
+.hero-wave svg {
+    width: 100%;
+    height: 80px;
+}
+
+.hero-cards {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.hero-card {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius);
+    padding: 20px 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    min-width: 140px;
+}
+
+.hero-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--primary);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+.card-num {
+    display: block;
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--accent);
+    margin-bottom: 4px;
+}
+
+.card-label {
+    display: block;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 600;
+}
+
+/* =================== PAGE HEADER =================== */
+.page-header {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    padding: 48px 40px;
+    color: var(--text-white);
+}
+
+.page-header h1 {
+    font-size: 32px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.page-icon {
+    font-size: 28px;
+}
+
+.page-header p {
+    margin-top: 8px;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* =================== CARDS GRID (PDFs) =================== */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    padding: 40px;
+}
+
+.pdf-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 28px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow);
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.pdf-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.pdf-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(102, 126, 234, 0.2);
+}
+
+.pdf-card:hover::before {
+    transform: scaleX(1);
+}
+
+.pdf-card-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.pdf-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.pdf-card p {
+    font-size: 14px;
+    color: var(--text-light);
+    line-height: 1.5;
+}
+
+.pdf-badge {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 4px 12px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* =================== VIDEOS GRID =================== */
+.videos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 24px;
+    padding: 40px;
+}
+
+.video-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.video-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.video-card video {
+    width: 100%;
+    display: block;
+    background: #000;
+    aspect-ratio: 16/9;
+}
+
+.video-label {
+    padding: 16px 20px;
+}
+
+.video-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.video-label h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+/* =================== PDF VIEWER SECTION =================== */
+.pdf-viewer-section {
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.pdf-viewer-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 48px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow);
+    max-width: 600px;
+    width: 100%;
+    border: 2px solid transparent;
+}
+
+.pdf-viewer-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary);
+}
+
+.pdf-viewer-icon {
+    font-size: 72px;
+    margin-bottom: 20px;
+}
+
+.pdf-viewer-card h2 {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+}
+
+.pdf-viewer-card p {
+    font-size: 16px;
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+.view-btn {
+    padding: 12px 32px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Cairo', sans-serif;
+}
+
+.view-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+}
+
+/* =================== QUIZ =================== */
+.quiz-container {
+    padding: 40px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.quiz-setup {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 40px;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.quiz-mode-select h2 {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 24px;
+    color: var(--text-dark);
+}
+
+.mode-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+}
+
+.mode-btn {
+    padding: 12px 24px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    background: var(--bg-card);
+    color: var(--text-light);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-family: 'Cairo', sans-serif;
+}
+
+.mode-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.mode-btn.active {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border-color: transparent;
+}
+
+.start-quiz-btn {
+    padding: 16px 48px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Cairo', sans-serif;
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+}
+
+.start-quiz-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.5);
+}
+
+/* Quiz Active */
+.quiz-active {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 32px;
+    box-shadow: var(--shadow);
+}
+
+.quiz-progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    border-radius: 4px;
+    transition: width 0.3s ease;
+    width: 0%;
+}
+
+.quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.quiz-counter {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.quiz-score {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--success);
+}
+
+.quiz-question-box h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.6;
+    margin-bottom: 24px;
+    padding: 20px;
+    background: var(--bg-light);
+    border-radius: 12px;
+    border-right: 4px solid var(--primary);
+}
+
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.quiz-option {
+    padding: 16px 20px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-dark);
+    background: var(--bg-card);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.quiz-option:hover {
+    border-color: var(--primary);
+    background: rgba(102, 126, 234, 0.05);
+}
+
+.quiz-option.selected {
+    border-color: var(--primary);
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.quiz-option.correct {
+    border-color: var(--success);
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success);
+}
+
+.quiz-option.incorrect {
+    border-color: var(--error);
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--error);
+}
+
+.quiz-option .option-letter {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--bg-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.quiz-option.correct .option-letter {
+    background: var(--success);
+    color: white;
+}
+
+.quiz-option.incorrect .option-letter {
+    background: var(--error);
+    color: white;
+}
+
+.quiz-option.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.quiz-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+    gap: 12px;
+}
+
+.quiz-nav-btn {
+    padding: 12px 32px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    background: var(--bg-card);
+    color: var(--text-dark);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'Cairo', sans-serif;
+}
+
+.quiz-nav-btn:hover:not(:disabled) {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.quiz-nav-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.quiz-nav-btn.finish {
+    background: linear-gradient(135deg, var(--success), #059669);
+    color: white;
+    border-color: transparent;
+}
+
+/* Quiz Results */
+.quiz-results {
+    display: flex;
+    justify-content: center;
+}
+
+.results-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 48px;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+    max-width: 700px;
+    width: 100%;
+}
+
+.results-icon {
+    font-size: 72px;
+    margin-bottom: 16px;
+}
+
+.results-card h2 {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+}
+
+.results-score {
+    margin: 20px 0;
+}
+
+.big-score {
+    font-size: 64px;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.total-score {
+    font-size: 24px;
+    color: var(--text-light);
+    font-weight: 700;
+}
+
+.results-percent {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.results-message {
+    font-size: 16px;
+    color: var(--text-light);
+    margin-bottom: 24px;
+}
+
+.results-review {
+    text-align: right;
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 24px;
+    padding: 16px;
+    background: var(--bg-light);
+    border-radius: 12px;
+}
+
+.review-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.review-item:last-child {
+    border-bottom: none;
+}
+
+.review-q {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+}
+
+.review-a {
+    font-size: 13px;
+    color: var(--text-light);
+}
+
+.review-a .correct-a {
+    color: var(--success);
+    font-weight: 700;
+}
+
+.review-a .wrong-a {
+    color: var(--error);
+    text-decoration: line-through;
+}
+
+.retry-btn {
+    padding: 14px 40px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Cairo', sans-serif;
+}
+
+.retry-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+}
+
+/* =================== FOOTER =================== */
+.site-footer {
+    background: linear-gradient(180deg, #1a1a2e, #0f0f23);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 40px 20px 24px;
+    text-align: center;
+    margin-top: auto;
+}
+
+.footer-wave {
+    max-width: 600px;
+    margin: 0 auto 20px;
+}
+
+.footer-wave svg {
+    width: 100%;
+    height: 30px;
+}
+
+.footer-text {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-white);
+    margin-bottom: 4px;
+}
+
+.footer-sub {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* =================== PDF MODAL =================== */
+.pdf-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    padding: 20px;
+    backdrop-filter: blur(4px);
+}
+
+.pdf-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pdf-modal-content {
+    width: 100%;
+    max-width: 1200px;
+    height: 90vh;
+    background: white;
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.pdf-modal-header {
+    padding: 16px 24px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pdf-modal-header h3 {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.pdf-close {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.2s ease;
+}
+
+.pdf-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+/* =================== MOBILE MENU =================== */
+.mobile-menu-btn {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1500;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    cursor: pointer;
+    padding: 10px;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.mobile-menu-btn span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* =================== RESPONSIVE =================== */
+@media (max-width: 1024px) {
+    .cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+    .videos-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(100%);
+        width: 260px;
+    }
+    .sidebar.open {
+        transform: translateX(0);
+    }
+    .main-content {
+        margin-right: 0;
+    }
+    .mobile-menu-btn {
+        display: flex;
+    }
+    .hero-title { font-size: 36px; }
+    .hero-subtitle { font-size: 24px; }
+    .hero-desc { font-size: 17px; }
+    .hero-cards { gap: 16px; }
+    .hero-card { min-width: 100px; padding: 16px 20px; }
+    .card-num { font-size: 28px; }
+    .page-header { padding: 32px 20px; }
+    .page-header h1 { font-size: 24px; }
+    .cards-grid, .videos-grid, .pdf-viewer-section, .quiz-container { padding: 20px; }
+    .pdf-viewer-card { padding: 32px 20px; }
+    .quiz-active { padding: 20px; }
+    .results-card { padding: 32px 20px; }
+    .big-score { font-size: 48px; }
+}
+
+@media (max-width: 480px) {
+    .hero-title { font-size: 28px; }
+    .hero-subtitle { font-size: 20px; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .videos-grid { grid-template-columns: 1fr; }
+    .mode-btn { padding: 10px 16px; font-size: 13px; }
+}
+    </style>
+</head>
+<body>
+
+<!-- =================== SIDEBAR =================== -->
+<nav class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <div class="logo-icon">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="4" width="56" height="56" rx="14" fill="url(#grad1)"/>
+                <path d="M8 32 Q16 12 24 32 T40 32 T56 32" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <circle cx="20" cy="32" r="3" fill="#fff"/>
+                <circle cx="32" cy="32" r="3" fill="#fff"/>
+                <circle cx="44" cy="32" r="3" fill="#fff"/>
+                <defs>
+                    <linearGradient id="grad1" x1="0" y1="0" x2="64" y2="64">
+                        <stop offset="0%" stop-color="#667eea"/>
+                        <stop offset="100%" stop-color="#764ba2"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+        <h2>DSP</h2>
+        <p>الإشارات الرقمية</p>
+    </div>
+    <ul class="nav-links">
+        <li class="nav-item active" data-page="welcome">
+            <span class="nav-icon">★</span>
+            <span>الترحيب</span>
+        </li>
+        <li class="nav-item" data-page="lectures">
+            <span class="nav-icon">①</span>
+            <span>المحاضرات</span>
+        </li>
+        <li class="nav-item" data-page="videos">
+            <span class="nav-icon">②</span>
+            <span>فيديوهات الشرح</span>
+        </li>
+        <li class="nav-item" data-page="bank-solutions">
+            <span class="nav-icon">③</span>
+            <span>حل مسائل البنك</span>
+        </li>
+        <li class="nav-item" data-page="mcq-bank">
+            <span class="nav-icon">④</span>
+            <span>حل MCQ البنك</span>
+        </li>
+        <li class="nav-item" data-page="quiz-solutions">
+            <span class="nav-icon">⑤</span>
+            <span>حل الكوز</span>
+        </li>
+        <li class="nav-item" data-page="homework">
+            <span class="nav-icon">⑥</span>
+            <span>حل الواجب</span>
+        </li>
+        <li class="nav-item" data-page="interactive-quiz">
+            <span class="nav-icon">⑦</span>
+            <span>كوز تفاعلي</span>
+        </li>
+    </ul>
+    <div class="sidebar-footer">
+        <p>جامعة المعارف</p>
+        <p>قسم هندسة تقنيات الحاسوب</p>
+    </div>
+</nav>
+
+<!-- =================== MAIN CONTENT =================== -->
+<main class="main-content" id="mainContent">
+
+    <!-- ============ PAGE 0: WELCOME ============ -->
+    <section class="page active" id="page-welcome">
+        <div class="welcome-hero">
+            <div class="hero-bg-pattern"></div>
+            <div class="hero-content">
+                <div class="hero-badge">★ مرحباً بكم ★</div>
+                <h1 class="hero-title">هندسة تقنيات الحاسوب</h1>
+                <h2 class="hero-subtitle">مادة الإشارات الرقمية</h2>
+                <p class="hero-desc">أنتم أبطال هندسة تقنيات الحاسوب</p>
+                <div class="hero-wave">
+                    <svg viewBox="0 0 800 100" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 50 Q100 10 200 50 T400 50 T600 50 T800 50" stroke="url(#waveGrad)" stroke-width="3" fill="none">
+                            <animate attributeName="d"
+                                values="M0 50 Q100 10 200 50 T400 50 T600 50 T800 50;
+                                        M0 50 Q100 90 200 50 T400 50 T600 50 T800 50;
+                                        M0 50 Q100 10 200 50 T400 50 T600 50 T800 50"
+                                dur="3s" repeatCount="indefinite"/>
+                        </path>
+                        <defs>
+                            <linearGradient id="waveGrad" x1="0" y1="0" x2="800" y2="0">
+                                <stop offset="0%" stop-color="#667eea"/>
+                                <stop offset="50%" stop-color="#764ba2"/>
+                                <stop offset="100%" stop-color="#667eea"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="hero-cards">
+                    <div class="hero-card" onclick="navigateTo('lectures')">
+                        <span class="card-num">7</span>
+                        <span class="card-label">محاضرات</span>
+                    </div>
+                    <div class="hero-card" onclick="navigateTo('videos')">
+                        <span class="card-num">9</span>
+                        <span class="card-label">فيديوهات</span>
+                    </div>
+                    <div class="hero-card" onclick="navigateTo('interactive-quiz')">
+                        <span class="card-num">40</span>
+                        <span class="card-label">سؤال تفاعلي</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ PAGE 1: LECTURES ============ -->
+    <section class="page" id="page-lectures">
+        <div class="page-header">
+            <h1><span class="page-icon">①</span> المحاضرات</h1>
+            <p>جميع محاضرات مادة الإشارات الرقمية بصيغة PDF</p>
+        </div>
+        <div class="cards-grid">
+            <div class="pdf-card" onclick="openPDF('assets/pdfs/lecture1.pdf')">
+                <div class="pdf-card-icon">📄</div>
+                <h3>المحاضرة الأولى</h3>
+                <p>مقدمة في الإشارات الرقمية</p>
+                <span class="pdf-badge">PDF</span>
+            </div>
+            <div class="pdf-card" onclick="openPDF('assets/pdfs/lecture2.pdf')">
+                <div class="pdf-card-icon">📄</div>
+                <h3>المحاضرة الثانية</h3>
+                <p>تصنيف الإشارات</p>
+                <span class="pdf-badge">PDF</span>
+            </div>
+            <div class="pdf-card" onclick="openPDF('assets/pdfs/lecture3.pdf')">
+                <div class="pdf-card-icon">📄</div>
+                <h3>المحاضرة الثالثة</h3>
+                <p>الإشارات والأنظمة</p>
+                <span class="pdf-badge">PDF</span>
+            </div>
+            <div class="pdf-card" onclick="openPDF('assets/pdfs/lecture4_5.pdf')">
+                <div class="pdf-card-icon">📄</div>
+                <h3>المحاضرة الرابعة والخامسة</h3>
+                <p>LTI Systems & Convolution</p>
+                <span class="pdf-badge">PDF</span>
+            </div>
+            <div class="pdf-card" onclick="openPDF('assets/pdfs/lecture7.pdf')">
+                <div class="pdf-card-icon">📄</div>
+                <h3>المحاضرة السابعة</h3>
+                <p>تحويل فورييه</p>
+                <span class="pdf-badge">PDF</span>
+            </div>
+            <div class="pdf-card" onclick="openPDF('assets/pdfs/lecture8.pdf')">
+                <div class="pdf-card-icon">📄</div>
+                <h3>المحاضرة الثامنة</h3>
+                <p>Topics in DSP</p>
+                <span class="pdf-badge">PDF</span>
+            </div>
+            <div class="pdf-card" onclick="openPDF('assets/pdfs/lecture9.pdf')">
+                <div class="pdf-card-icon">📄</div>
+                <h3>المحاضرة التاسعة</h3>
+                <p>Advanced DSP Topics</p>
+                <span class="pdf-badge">PDF</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ PAGE 2: VIDEOS ============ -->
+    <section class="page" id="page-videos">
+        <div class="page-header">
+            <h1><span class="page-icon">②</span> فيديوهات الشرح</h1>
+            <p>جميع فيديوهات شرح مادة الإشارات الرقمية</p>
+        </div>
+        <div class="videos-grid">
+            <div class="video-card">
+                <video controls preload="none"><source src="assets/videos/week1a.mp4" type="video/mp4"></video>
+                <div class="video-label"><span class="video-tag">Week 1A</span><h3>شرح DSP - الأسبوع الأول (A)</h3></div>
+            </div>
+            <div class="video-card">
+                <video controls preload="none"><source src="assets/videos/week1b.mp4" type="video/mp4"></video>
+                <div class="video-label"><span class="video-tag">Week 1B</span><h3>شرح DSP - الأسبوع الأول (B)</h3></div>
+            </div>
+            <div class="video-card">
+                <video controls preload="none"><source src="assets/videos/week2a.mp4" type="video/mp4"></video>
+                <div class="video-label"><span class="video-tag">Week 2A</span><h3>شرح DSP - الأسبوع الثاني (A)</h3></div>
+            </div>
+            <div class="video-card">
+                <video controls preload="none"><source src="assets/videos/week2b.mp4" type="video/mp4"></video>
+                <div class="video-label"><span class="video-tag">Week 2B</span><h3>شرح DSP - الأسبوع الثاني (B)</h3></div>
+            </div>
+            <div class="video-card">
+                <video controls preload="none"><source src="assets/videos/week3.mp4" type="video/mp4"></video>
+                <div class="video-label"><span class="video-tag">Week 3</span><h3>شرح DSP - الأسبوع الثالث</h3></div>
+            </div>
+            <div class="video-card">
+                <video controls preload="none"><source src="assets/videos/week4a.mp4" type="video/mp4"></video>
+                <div class="video-label"><span class="video-tag">Week 4A</span><h3>شرح DSP - الأسبوع الرابع (A)</h3></div>
+            </div>
+            <div class="video-card">
+                <video controls preload="none"><source src="assets/videos/week4b.mp4" type="video/mp4"></video>
+                <div class="video-label"><span class="video-tag">Week 4B</span><h3>شرح DSP - الأسبوع الرابع (B)</h3></div>
+            </div>
+            <div class="video-card">
+                <video controls preload="none"><source src="assets/videos/week7a.mp4" type="video/mp4"></video>
+                <div class="video-label"><span class="video-tag">Week 7A</span><h3>شرح DSP - الأسبوع السابع (A)</h3></div>
+            </div>
+            <div class="video-card">
+                <video controls preload="none"><source src="assets/videos/week7b.mp4" type="video/mp4"></video>
+                <div class="video-label"><span class="video-tag">Week 7B</span><h3>شرح DSP - الأسبوع السابع (B)</h3></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ PAGE 3: BANK SOLUTIONS ============ -->
+    <section class="page" id="page-bank-solutions">
+        <div class="page-header">
+            <h1><span class="page-icon">③</span> حل مسائل البنك</h1>
+            <p>حلول مسائل بنك الأسئلة لمادة الإشارات الرقمية</p>
+        </div>
+        <div class="pdf-viewer-section">
+            <div class="pdf-viewer-card" onclick="openPDF('assets/pdfs/bank_solutions.pdf')">
+                <div class="pdf-viewer-icon">📝</div>
+                <h2>حل مسائل بنك الأسئلة</h2>
+                <p>حل جميع المسائل الموجودة في بنك الأسئلة مع الشرح التفصيلي</p>
+                <button class="view-btn">عرض الملف</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ PAGE 4: MCQ BANK ============ -->
+    <section class="page" id="page-mcq-bank">
+        <div class="page-header">
+            <h1><span class="page-icon">④</span> حل MCQ البنك</h1>
+            <p>حلول أسئلة الاختيار من متعدد من بنك الأسئلة</p>
+        </div>
+        <div class="pdf-viewer-section">
+            <div class="pdf-viewer-card" onclick="openPDF('assets/pdfs/mcq_bank.pdf')">
+                <div class="pdf-viewer-icon">✅</div>
+                <h2>حل MCQ البنك</h2>
+                <p>20 سؤال اختيار من متعدد مع الإجابات الصحيحة مميزة بالألوان</p>
+                <button class="view-btn">عرض الملف</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ PAGE 5: QUIZ SOLUTIONS ============ -->
+    <section class="page" id="page-quiz-solutions">
+        <div class="page-header">
+            <h1><span class="page-icon">⑤</span> حل الكوز</h1>
+            <p>حلول كوز د. عبدالكريم دواح</p>
+        </div>
+        <div class="pdf-viewer-section">
+            <div class="pdf-viewer-card" onclick="openPDF('assets/pdfs/quiz_solutions.pdf')">
+                <div class="pdf-viewer-icon">🎯</div>
+                <h2>حل الكوز - د. عبدالكريم دواح</h2>
+                <p>20 سؤال من كوز د. عبدالكريم مع الإجابات الصحيحة</p>
+                <button class="view-btn">عرض الملف</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ PAGE 6: HOMEWORK ============ -->
+    <section class="page" id="page-homework">
+        <div class="page-header">
+            <h1><span class="page-icon">⑥</span> حل الواجب</h1>
+            <p>حل الواجب لمادة الإشارات الرقمية</p>
+        </div>
+        <div class="pdf-viewer-section">
+            <div class="pdf-viewer-card" onclick="openPDF('assets/pdfs/homework_solutions.pdf')">
+                <div class="pdf-viewer-icon">📋</div>
+                <h2>حل الواجب</h2>
+                <p>الحل الكامل للواجب المنزلي لمادة الإشارات الرقمية</p>
+                <button class="view-btn">عرض الملف</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ PAGE 7: INTERACTIVE QUIZ ============ -->
+    <section class="page" id="page-interactive-quiz">
+        <div class="page-header">
+            <h1><span class="page-icon">⑦</span> الكوز التفاعلي</h1>
+            <p>اختبر معلوماتك في الإشارات الرقمية - 40 سؤال اختيار من متعدد</p>
+        </div>
+        <div class="quiz-container">
+            <!-- Quiz Setup -->
+            <div class="quiz-setup" id="quizSetup">
+                <div class="quiz-mode-select">
+                    <h2>اختر نوع الأسئلة</h2>
+                    <div class="mode-buttons">
+                        <button class="mode-btn active" data-source="all">الكل (40 سؤال)</button>
+                        <button class="mode-btn" data-source="bank">بنك الأسئلة (20)</button>
+                        <button class="mode-btn" data-source="quiz">الكوز (20)</button>
+                    </div>
+                    <button class="start-quiz-btn" onclick="startQuiz()">ابدأ الكوز</button>
+                </div>
+            </div>
+            <!-- Quiz Active -->
+            <div class="quiz-active" id="quizActive" style="display:none;">
+                <div class="quiz-progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+                <div class="quiz-header">
+                    <span class="quiz-counter">السؤال <span id="currentQ">1</span> من <span id="totalQ">40</span></span>
+                    <span class="quiz-score">النتيجة: <span id="scoreDisplay">0</span></span>
+                </div>
+                <div class="quiz-question-box">
+                    <h3 id="questionText"></h3>
+                    <div class="quiz-options" id="quizOptions"></div>
+                </div>
+                <div class="quiz-nav">
+                    <button class="quiz-nav-btn" id="prevBtn" onclick="prevQuestion()">السابق</button>
+                    <button class="quiz-nav-btn" id="nextBtn" onclick="nextQuestion()">التالي</button>
+                </div>
+            </div>
+            <!-- Quiz Results -->
+            <div class="quiz-results" id="quizResults" style="display:none;">
+                <div class="results-card">
+                    <div class="results-icon" id="resultsIcon">🎉</div>
+                    <h2>انتهى الكوز!</h2>
+                    <div class="results-score">
+                        <span class="big-score" id="finalScore">0</span>
+                        <span class="total-score">/ <span id="finalTotal">40</span></span>
+                    </div>
+                    <p class="results-percent" id="resultsPercent"></p>
+                    <p class="results-message" id="resultsMessage"></p>
+                    <div class="results-review" id="resultsReview"></div>
+                    <button class="retry-btn" onclick="resetQuiz()">إعادة المحاولة</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-wave">
+                <svg viewBox="0 0 800 40" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 20 Q100 5 200 20 T400 20 T600 20 T800 20" stroke="rgba(255,255,255,0.3)" stroke-width="2" fill="none"/>
+                </svg>
+            </div>
+            <p class="footer-text">تم عمل موقع بواسطة مأمون السيد علي المشهداني</p>
+            <p class="footer-sub">جامعة المعارف - قسم هندسة تقنيات الحاسوب</p>
+        </div>
+    </footer>
+</main>
+
+<!-- PDF Viewer Modal -->
+<div class="pdf-modal" id="pdfModal">
+    <div class="pdf-modal-content">
+        <div class="pdf-modal-header">
+            <h3 id="pdfModalTitle">عرض PDF</h3>
+            <button class="pdf-close" onclick="closePDF()">✕</button>
+        </div>
+        <iframe id="pdfFrame" src="" style="width:100%;height:100%;border:none;"></iframe>
+    </div>
+</div>
+
+<!-- Mobile Menu Toggle -->
+<button class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleSidebar()">
+    <span></span><span></span><span></span>
+</button>
+
+<script>
+// =================== QUIZ DATA ===================
+// Extracted from MCQ Bank & Quiz Solutions PDFs
+// All answers verified from highlighted correct answers in the original PDFs
+const quizData = {
+    bank: [
+        { id: 1, question: 'Which frequency range is considered the "mid" range in audio?', options: ['20 Hz to 250 Hz', '4,000 Hz to 20,000 Hz', '250 Hz to 4,000 Hz', '0 Hz to 20 Hz'], correct: 2 },
+        { id: 2, question: 'Which of the following is an odd signal?', options: ['A cos Ω₀t', 'A constant A', 'A sin Ω₀t', 'A cos ω₀n'], correct: 2 },
+        { id: 3, question: 'A signal repeats every 2 sec (and therefore also every 4, 6, 8 sec). Its fundamental period is:', options: ['Any multiple of 2 sec', '4 sec', '2 sec', '8 sec'], correct: 2 },
+        { id: 4, question: 'A system is causal if its output at any time depends on:', options: ['Present and future inputs only', 'Past and future inputs', 'Future inputs only', 'Present and past inputs only'], correct: 3 },
+        { id: 5, question: 'A 0 V to 10 V signal is digitized by an 8-bit ADC. The step size Δ is:', options: ['19.53 mV', '39.06 mV', '1.25 V', '78.1 mV'], correct: 1 },
+        { id: 6, question: 'An ADC converts a signal from:', options: ['Discrete-time, discrete-amplitude to continuous-time, continuous-amplitude', 'Continuous-time, continuous-amplitude to discrete-time, discrete-amplitude (binary)', 'Continuous-time to continuous-time with higher amplitude', 'Binary to decimal form'], correct: 1 },
+        { id: 7, question: 'An LTI system receives the input x[n]=2,3,1 and has impulse response h[n]=1,2,1 both starting at n=0. What is the value of the output sample y[2]?', options: ['9', '7', '2', '5'], correct: 0 },
+        { id: 8, question: 'System B is y[n] = x[n + 1] with input x[n] = 3. What is y[−1]?', options: ['1', '2', '3', '0'], correct: 0 },
+        { id: 9, question: 'According to the equations s1(t) = 5t and s2(t) = 5t², what classification is given to the signals?', options: ['They are multi-dimensional spatial plane signals', 'They are constant signals that do not vary over time', 'They are signals of one variable', 'They are signals of three independent variables'], correct: 2 },
+        { id: 10, question: 'A 10-bit ADC has how many quantization levels?', options: ['512', '1024', '100', '20'], correct: 1 },
+        { id: 11, question: 'A causal LTI system has h[n] = 3 and output y[n] = 6. Find x[n].', options: ['{1, 2, 2}', '{2, 7, 10}', '{1, 2, 4}', '{1, 3.5, 5}'], correct: 0 },
+        { id: 12, question: 'A discrete-time sinusoid oscillates fastest when ω equals:', options: ['ω → ∞', 'π', '2π', 'π/2'], correct: 1 },
+        { id: 13, question: 'A 4-bit DAC has Vref = 16 V. The output for input 1011 is:', options: ['10 V', '16 V', '13 V', '11 V'], correct: 3 },
+        { id: 14, question: 'An input signal x[n] has a finite length of 5 samples, and Lh=4 samples. What is the total number of samples in the output?', options: ['9 samples', '5 samples', '20 samples', '8 samples'], correct: 3 },
+        { id: 15, question: 'What is the fundamental definition of a signal?', options: ['A function that carries information from one point to another point', 'A continuous wave that has no independent variables', 'A mathematical tool used only for audio recording', 'A device that amplifies electrical energy'], correct: 0 },
+        { id: 16, question: 'The sequence x(n) = cos(0.1n) is:', options: ['Not periodic', 'Periodic with N = 10', 'Periodic with N = 63', 'Periodic with N = 20π'], correct: 0 },
+        { id: 17, question: 'An input x[n] has 4 samples and the impulse response h[n] has 3 samples. How many samples does y[n] = x[n] ∗ h[n] have?', options: ['7', '12', '6', '4'], correct: 2 },
+        { id: 18, question: 'An LTI system has h[n]={1,−1} and input x[n]={1,2,1} both start at n=0. What is y[n]?', options: ['{1, 1, -1, -1}', '{1, 3, 3, 1}', '{1, -1, 1, -1}', '{1, 1, 1, -1}'], correct: 0 },
+        { id: 19, question: 'Let x[n]={2,1,3} and h[n]={1,2,1} both for n=0,1,2. What is the value of y[2]?', options: ['5', '7', '8', '9'], correct: 1 },
+        { id: 20, question: 'Deconvolution is the operation that:', options: ['Computes the output y[n] from x[n] and h[n]', 'Recovers the input x[n] from the output y[n] and the impulse response h[n]', 'Computes h[n] from x[n] only', 'Multiplies x[n] and h[n] sample by sample'], correct: 1 }
+    ],
+    quiz: [
+        { id: 21, question: 'Real-world analog signals such as sound, temperature and voltage are continuous in:', options: ['Time only', 'Amplitude only', 'Both time and amplitude', 'Neither time nor amplitude'], correct: 2 },
+        { id: 22, question: 'Which of the following is an odd signal?', options: ['A cos (Ω₀t)', 'A constant A', 'A sin (Ω₀t)', 'A cos (ω₀n)'], correct: 2 },
+        { id: 23, question: 'A system is causal if its output at any time depends on:', options: ['Future inputs only', 'Present and past inputs only', 'Past and future inputs', 'Present and future inputs only'], correct: 1 },
+        { id: 24, question: 'What is the fundamental definition of a signal?', options: ['A device that amplifies electrical energy', 'A function that carries information from one point to another point', 'A continuous wave that has no independent variables', 'A mathematical tool used only for audio recording'], correct: 1 },
+        { id: 25, question: 'According to the equations s1(t) = 5t and s2(t) = 5t², what classification is given to the signals?', options: ['They are multi-dimensional spatial plane signals', 'They are signals of one variable', 'They are signals of three independent variables', 'They are constant signals that do not vary over time'], correct: 1 },
+        { id: 26, question: 'A discrete-time sinusoid oscillates fastest when ω equals:', options: ['π/2', 'π', '2π', 'ω → ∞'], correct: 1 },
+        { id: 27, question: 'The sequence x(n) = cos(0.1n) is:', options: ['Periodic with N = 20π', 'Periodic with N = 63', 'Periodic with N = 10', 'Not periodic'], correct: 3 },
+        { id: 28, question: 'A signal repeats every 2 s (and therefore also every 4, 6, 8 s). Its fundamental period is:', options: ['2 s', '4 s', '8 s', 'Any multiple of 2 s'], correct: 0 },
+        { id: 29, question: 'In a discrete-time signal, the frequency f is measured in:', options: ['Hertz (Hz)', 'Radians per second', 'Cycles per sample (unitless)', 'Seconds'], correct: 2 },
+        { id: 30, question: 'A digital audio filter has impulse response h[n] = 1 for n=0,1. If the input x[n] = 2 is passed through the system, what is the complete output sequence y[n]?', options: ['y[n] = 2', 'y[n] = 2', 'y[n] = 2', 'y[n] = 1'], correct: 1 },
+        { id: 31, question: 'A causal LTI system has h[n] = 3 and output y[n] = 6. Find x[n].', options: ['2', '10', '4', '5'], correct: 0 },
+        { id: 32, question: 'System B is y[n] = x[n+1] with input x[n] = 3. What is y[-1]?', options: ['0', '1', '2', '3'], correct: 1 },
+        { id: 33, question: 'An LTI system receives the input x[n] = 1 and has impulse response h[n] = 1. What is the value of the output sample y[2]?', options: ['2', '7', '9', '5'], correct: 2 },
+        { id: 34, question: 'An ADC converts a signal from:', options: ['Discrete-time, discrete-amplitude to continuous-time, continuous-amplitude', 'Continuous-time, continuous-amplitude to discrete-time, discrete-amplitude', 'Continuous-time to continuous-time with higher amplitude', 'Binary to decimal form'], correct: 1 },
+        { id: 35, question: 'A 10-bit ADC has how many quantization levels?', options: ['1024', '512', '100', '20'], correct: 0 },
+        { id: 36, question: 'A 0 V to 10 V signal is digitized by an 8-bit ADC. The step size Δ is:', options: ['1.25 V', '78.1 mV', '39.06 mV', '19.53 mV'], correct: 2 },
+        { id: 37, question: 'A 4-bit DAC has Vref = 16 V. The output for input 1011 is:', options: ['16 V', '10 V', '13 V', '11 V'], correct: 3 },
+        { id: 38, question: 'Most of the energy of the human voice lies in which band?', options: ['20 Hz – 250 Hz', '250 Hz – 4,000 Hz', '4,000 Hz – 20,000 Hz', 'Above 20,000 Hz'], correct: 1 },
+        { id: 39, question: 'Which frequency range is considered the "mid" range in audio?', options: ['20 Hz to 250 Hz', '250 Hz to 4,000 Hz', '4,000 Hz to 20,000 Hz', '0 Hz to 20 Hz'], correct: 1 },
+        { id: 40, question: 'An input signal x[n] has a finite length of 5 samples, and Lh = 4 samples. What is the total number of samples in the output?', options: ['20 samples', '9 samples', '8 samples', '5 samples'], correct: 2 }
+    ]
+};
+
+// =================== NAVIGATION ===================
+const navItems = document.querySelectorAll('.nav-item');
+const pages = document.querySelectorAll('.page');
+const sidebar = document.getElementById('sidebar');
+
+function navigateTo(pageId) {
+    pages.forEach(p => p.classList.remove('active'));
+    const targetPage = document.getElementById('page-' + pageId);
+    if (targetPage) targetPage.classList.add('active');
+    navItems.forEach(item => item.classList.remove('active'));
+    const activeNav = document.querySelector('.nav-item[data-page="' + pageId + '"]');
+    if (activeNav) activeNav.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (window.innerWidth <= 768) sidebar.classList.remove('open');
+}
+
+navItems.forEach(item => {
+    item.addEventListener('click', () => navigateTo(item.dataset.page));
+});
+
+// =================== MOBILE MENU ===================
+function toggleSidebar() { sidebar.classList.toggle('open'); }
+
+document.addEventListener('click', (e) => {
+    if (window.innerWidth <= 768) {
+        if (!sidebar.contains(e.target) && !document.getElementById('mobileMenuBtn').contains(e.target)) {
+            sidebar.classList.remove('open');
+        }
+    }
+});
+
+// =================== PDF VIEWER ===================
+function openPDF(path) {
+    const modal = document.getElementById('pdfModal');
+    const frame = document.getElementById('pdfFrame');
+    const title = document.getElementById('pdfModalTitle');
+    const titles = {
+        'lecture1.pdf': 'المحاضرة الأولى', 'lecture2.pdf': 'المحاضرة الثانية',
+        'lecture3.pdf': 'المحاضرة الثالثة', 'lecture4_5.pdf': 'المحاضرة الرابعة والخامسة',
+        'lecture7.pdf': 'المحاضرة السابعة', 'lecture8.pdf': 'المحاضرة الثامنة',
+        'lecture9.pdf': 'المحاضرة التاسعة', 'bank_solutions.pdf': 'حل مسائل البنك',
+        'mcq_bank.pdf': 'حل MCQ البنك', 'quiz_solutions.pdf': 'حل الكوز',
+        'homework_solutions.pdf': 'حل الواجب'
+    };
+    const fileName = path.split('/').pop();
+    title.textContent = titles[fileName] || 'عرض PDF';
+    frame.src = path;
+    modal.classList.add('active');
+}
+
+function closePDF() {
+    document.getElementById('pdfModal').classList.remove('active');
+    document.getElementById('pdfFrame').src = '';
+}
+
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closePDF(); });
+document.getElementById('pdfModal').addEventListener('click', (e) => { if (e.target.id === 'pdfModal') closePDF(); });
+
+// =================== QUIZ LOGIC ===================
+let currentQuestions = [];
+let currentQuestionIndex = 0;
+let userAnswers = [];
+let quizSource = 'all';
+
+const modeBtns = document.querySelectorAll('.mode-btn');
+modeBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        modeBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        quizSource = btn.dataset.source;
+    });
+});
+
+function startQuiz() {
+    if (quizSource === 'all') currentQuestions = [...quizData.bank, ...quizData.quiz];
+    else if (quizSource === 'bank') currentQuestions = [...quizData.bank];
+    else currentQuestions = [...quizData.quiz];
+    currentQuestionIndex = 0;
+    userAnswers = new Array(currentQuestions.length).fill(null);
+    document.getElementById('quizSetup').style.display = 'none';
+    document.getElementById('quizActive').style.display = 'block';
+    document.getElementById('quizResults').style.display = 'none';
+    document.getElementById('totalQ').textContent = currentQuestions.length;
+    renderQuestion();
+}
+
+function renderQuestion() {
+    const q = currentQuestions[currentQuestionIndex];
+    const progress = ((currentQuestionIndex + 1) / currentQuestions.length) * 100;
+    document.getElementById('progressFill').style.width = progress + '%';
+    document.getElementById('currentQ').textContent = currentQuestionIndex + 1;
+    let score = 0;
+    for (let i = 0; i < currentQuestions.length; i++) {
+        if (userAnswers[i] !== null && userAnswers[i] === currentQuestions[i].correct) score++;
+    }
+    document.getElementById('scoreDisplay').textContent = score;
+    document.getElementById('questionText').textContent = q.question;
+    const optionsContainer = document.getElementById('quizOptions');
+    optionsContainer.innerHTML = '';
+    const letters = ['A', 'B', 'C', 'D'];
+    q.options.forEach((option, index) => {
+        const optionEl = document.createElement('div');
+        optionEl.className = 'quiz-option';
+        if (userAnswers[currentQuestionIndex] === index) optionEl.classList.add('selected');
+        optionEl.innerHTML = '<span class="option-letter">' + letters[index] + '</span><span class="option-text">' + option + '</span>';
+        optionEl.addEventListener('click', () => selectAnswer(index));
+        optionsContainer.appendChild(optionEl);
+    });
+    document.getElementById('prevBtn').disabled = currentQuestionIndex === 0;
+    const nextBtn = document.getElementById('nextBtn');
+    if (currentQuestionIndex === currentQuestions.length - 1) {
+        nextBtn.textContent = 'إنهاء';
+        nextBtn.classList.add('finish');
+    } else {
+        nextBtn.textContent = 'التالي';
+        nextBtn.classList.remove('finish');
+    }
+}
+
+function selectAnswer(index) { userAnswers[currentQuestionIndex] = index; renderQuestion(); }
+
+function nextQuestion() {
+    if (currentQuestionIndex < currentQuestions.length - 1) { currentQuestionIndex++; renderQuestion(); }
+    else { showResults(); }
+}
+
+function prevQuestion() { if (currentQuestionIndex > 0) { currentQuestionIndex--; renderQuestion(); } }
+
+function showResults() {
+    let score = 0;
+    const reviewItems = [];
+    currentQuestions.forEach((q, i) => {
+        const userAnswer = userAnswers[i];
+        const isCorrect = userAnswer === q.correct;
+        if (isCorrect) score++;
+        const letters = ['A', 'B', 'C', 'D'];
+        const userLetter = userAnswer !== null ? letters[userAnswer] : '—';
+        const correctLetter = letters[q.correct];
+        reviewItems.push({
+            questionNum: i + 1, question: q.question,
+            userAnswer: userAnswer !== null ? userLetter + '. ' + q.options[userAnswer] : 'لم يتم الإجابة',
+            correctAnswer: correctLetter + '. ' + q.options[q.correct], isCorrect: isCorrect
+        });
+    });
+    const total = currentQuestions.length;
+    const percent = Math.round((score / total) * 100);
+    document.getElementById('finalScore').textContent = score;
+    document.getElementById('finalTotal').textContent = total;
+    document.getElementById('resultsPercent').textContent = percent + '%';
+    let message, icon;
+    if (percent >= 90) { message = 'ممتاز! أنت بطل هندسة تقنيات الحاسوب! 🏆'; icon = '🎉'; }
+    else if (percent >= 75) { message = 'جيد جداً! استمر على هذا التميز!'; icon = '👏'; }
+    else if (percent >= 60) { message = 'جيد! راجع الأسئلة الخاطئة وحاول مرة أخرى.'; icon = '👍'; }
+    else if (percent >= 40) { message = 'مقبول. تحتاج إلى مراجعة المادة أكثر.'; icon = '📚'; }
+    else { message = 'تحتاج إلى دراسة أكثر. لا تستسلم!'; icon = '💪'; }
+    document.getElementById('resultsMessage').textContent = message;
+    document.getElementById('resultsIcon').textContent = icon;
+    const reviewContainer = document.getElementById('resultsReview');
+    reviewContainer.innerHTML = '<h3 style="margin-bottom:12px;font-size:16px;font-weight:700;">مراجعة الإجابات:</h3>';
+    reviewItems.forEach(item => {
+        const reviewEl = document.createElement('div');
+        reviewEl.className = 'review-item';
+        const statusIcon = item.isCorrect ? '✅' : '❌';
+        reviewEl.innerHTML = '<div class="review-q">' + statusIcon + ' س' + item.questionNum + ': ' + item.question + '</div>' +
+            '<div class="review-a">' +
+            (!item.isCorrect ? '<span class="wrong-a">إجابتك: ' + item.userAnswer + '</span><br>' : '') +
+            '<span class="correct-a">الإجابة الصحيحة: ' + item.correctAnswer + '</span></div>';
+        reviewContainer.appendChild(reviewEl);
+    });
+    document.getElementById('quizActive').style.display = 'none';
+    document.getElementById('quizResults').style.display = 'flex';
+}
+
+function resetQuiz() {
+    document.getElementById('quizResults').style.display = 'none';
+    document.getElementById('quizSetup').style.display = 'block';
+    currentQuestions = [];
+    userAnswers = [];
+    currentQuestionIndex = 0;
+}
+
+// =================== INIT ===================
+window.addEventListener('DOMContentLoaded', () => navigateTo('welcome'));
+</script>
+</body>
+</html>
